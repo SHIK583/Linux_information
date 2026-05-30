@@ -1,0 +1,60 @@
+##date: can give the current date information.
+##ls: can help to procide the infomation of the file and folder
+##mkdir: help to create the file and folder or directiory
+##ls - l: give the information more about who make the file folder on which date and time
+##pwd: to check teh current working directory 
+##touch: it is use to create the new file inside the folder 
+##cd: it is used to change the directory. cd devops / and comeback in the root directory cd ..
+##rm: used to remove the file not directory.
+##rmdir: remove the directory or use rm -r
+##top: it can display all the running process. and to stop that contrl +c
+##echo: used to print the any thing on the system or help to print.
+##cat: it can help to show the thing which inside the file
+##echo "This is the best thing to learn" > devopsfile.txt: this command help to write the line inside the file if the file do not exist then it could create the file and write it.
+#cat  = print entire file
+#more = read large files page by page (forward only)
+#less = improved more (forward + backward + search)
+#head = beginning of file
+#tail = end of file
+#tail -f = live log monitoring
+For DevOps/Linux work, you'll use less and tail -f much more often than more.
+  #cp: this can be used to copy the file and folder from one place to another
+  #cp -r: this can be help to copy the file recusrslively.
+  ##mv: this can help to move the file from source to destination.also help to change the name and it help to delete the folder from the source.
+  ##wc: help to count the file like word and line
+  ##If we want to write or create a file with multiple line we can use : " nano filename.txt"
+  #then write anything to save the file we can use control+o and then enter and and to come out we can use control +x.
+
+  | Soft Link                          | Hard Link                                    |
+| ---------------------------------- | -------------------------------------------- |
+| `ln -s source link`                | `ln source link`                             |
+| Has a different inode              | Same inode as original file                  |
+| Can link across filesystems        | Cannot link across filesystems               |
+| Can link directories               | Usually cannot link directories              |
+| Breaks if original file is deleted | Still works even if original file is deleted |
+
+  
+
+  | Command | Purpose                                                       | Example                    |
+| ------- | ------------------------------------------------------------- | -------------------------- |
+| `cut`   | Extract specific columns/fields from a file                   | `cut -d',' -f1 data.csv`   |
+| `tee`   | Display output on screen and save it to a file simultaneously | `ls \| tee output.txt`     |
+| `sort`  | Sort lines alphabetically or numerically                      | `sort names.txt`           |
+| `clear` | Clear the terminal screen                                     | `clear`                    |
+| `diff`  | Compare two files line by line                                | `diff file1.txt file2.txt` |
+
+
+  
+  | Action              | Command        |
+| ------------------- | -------------- |
+| Open file           | `vi notes.txt` |
+| Insert text         | `i`            |
+| Exit insert mode    | `Esc`          |
+| Save                | `:w`           |
+| Save & Exit         | `:wq`          |
+| Exit without saving | `:q!`          |
+
+
+
+
+  
