@@ -845,7 +845,421 @@ These are the most common Linux user and group management commands used by syste
 | Difference between `reboot` and `shutdown -r now`? | Both restart the server. `reboot` is a shortcut, while `shutdown -r now` uses the shutdown utility and can also schedule reboots. |
 
 
+### Linux Commands Interview Preparation Table
 
+| Command              | Definition                               | Why We Use It                               | Syntax                      | Example                  |
+| -------------------- | ---------------------------------------- | ------------------------------------------- | --------------------------- | ------------------------ |
+| **sudo**             | Super User Do                            | Execute commands with root/admin privileges | `sudo <command>`            | `sudo apt update`        |
+| **shutdown**         | Shuts down the system safely             | Power off the server/system                 | `shutdown [option] [time]`  | `sudo shutdown now`      |
+| **reboot**           | Restarts the system                      | Reboot server after updates or maintenance  | `reboot`                    | `sudo reboot`            |
+| **apt**              | Package manager for Ubuntu/Debian        | Install, update, and remove packages        | `apt <option> <package>`    | `sudo apt install nginx` |
+| **yum**              | Package manager for CentOS/RHEL 7        | Manage software packages                    | `yum <option> <package>`    | `sudo yum install httpd` |
+| **dnf**              | Modern package manager for RHEL 8/Fedora | Better package management than yum          | `dnf <option> <package>`    | `sudo dnf install nginx` |
+| **pacman**           | Package manager for Arch Linux           | Install and manage software packages        | `pacman <option> <package>` | `sudo pacman -S nginx`   |
+| **portage (emerge)** | Package manager for Gentoo Linux         | Install and manage source-based packages    | `emerge <package>`          | `sudo emerge nginx`      |
+| **useradd**          | Creates a new user account               | Add users to the system                     | `useradd [option] username` | `sudo useradd -m shikha` |
+| **whoami**           | Displays current logged-in user          | Verify current user account                 | `whoami`                    | `whoami`                 |
+| **su**               | Switch User                              | Switch to another user account              | `su [username]`             | `su - root`              |
+| **passwd**           | Password management command              | Change or reset user passwords              | `passwd [username]`         | `sudo passwd shikha`     |
+| **userdel**          | Deletes a user account                   | Remove users from the system                | `userdel [option] username` | `sudo userdel -r shikha` |
+
+---
+
+## Common Interview Questions
+
+| Question                                       | Answer                                                                                       |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| What is sudo?                                  | A command that allows a permitted user to execute commands as another user, usually root.    |
+| Difference between su and sudo?                | `su` switches to another user account, while `sudo` runs a command with elevated privileges. |
+| What is apt?                                   | Package manager used in Ubuntu/Debian systems.                                               |
+| Difference between apt update and apt upgrade? | `apt update` refreshes package lists, `apt upgrade` installs available updates.              |
+| How do you create a user?                      | `sudo useradd -m username`                                                                   |
+| How do you delete a user?                      | `sudo userdel -r username`                                                                   |
+| How do you check the current user?             | `whoami`                                                                                     |
+| How do you reboot a Linux server?              | `sudo reboot`                                                                                |
+| How do you shutdown Linux immediately?         | `sudo shutdown now`                                                                          |
+| How do you change a user's password?           | `sudo passwd username`                                                                       |
+
+---
+
+### Quick Revision (One-Liners)
+
+| Command    | Purpose                       |
+| ---------- | ----------------------------- |
+| `sudo`     | Run command as root           |
+| `shutdown` | Power off system              |
+| `reboot`   | Restart system                |
+| `apt`      | Package management (Ubuntu)   |
+| `yum`      | Package management (CentOS 7) |
+| `dnf`      | Package management (RHEL 8+)  |
+| `useradd`  | Create user                   |
+| `whoami`   | Show current user             |
+| `su`       | Switch user                   |
+| `passwd`   | Change password               |
+| `userdel`  | Delete user                   |
+
+This format is commonly used for Linux Administrator, AWS, DevOps, and Technical Support interviews.
+
+### Linux User, Group & File Permission Commands (Interview Preparation)
+
+| Command        | Definition                 | Why We Use It                     | Syntax                           | Example                             |
+| -------------- | -------------------------- | --------------------------------- | -------------------------------- | ----------------------------------- |
+| **groupadd**   | Creates a new group        | Manage users under a common group | `groupadd group_name`            | `sudo groupadd developers`          |
+| **gpasswd -a** | Add a user to a group      | Grant group permissions to a user | `gpasswd -a username group_name` | `sudo gpasswd -a shikha developers` |
+| **gpasswd -d** | Remove a user from a group | Revoke group permissions          | `gpasswd -d username group_name` | `sudo gpasswd -d shikha developers` |
+| **groupdel**   | Deletes a group            | Remove unused groups              | `groupdel group_name`            | `sudo groupdel developers`          |
+
+---
+
+# File Permission Commands
+
+| Command   | Definition                                             | Why We Use It                             | Syntax                   | Example                          |
+| --------- | ------------------------------------------------------ | ----------------------------------------- | ------------------------ | -------------------------------- |
+| **umask** | Sets default permissions for new files and directories | Control default file security             | `umask [value]`          | `umask 022`                      |
+| **ls -l** | Lists files with detailed permissions                  | Check permissions, owner, and group       | `ls -l`                  | `ls -l file.txt`                 |
+| **chmod** | Changes file permissions                               | Grant or revoke read/write/execute access | `chmod permissions file` | `chmod 755 script.sh`            |
+| **chown** | Changes file owner                                     | Transfer ownership of files/directories   | `chown owner file`       | `sudo chown shikha file.txt`     |
+| **chgrp** | Changes group ownership                                | Assign files to a different group         | `chgrp group file`       | `sudo chgrp developers file.txt` |
+
+---
+
+# Understanding Linux Permissions
+
+When you run:
+
+```bash
+ls -l
+```
+
+Output:
+
+```bash
+-rwxr-xr-- 1 shikha developers 100 Jun 2 test.sh
+```
+
+Breakdown:
+
+| Part  | Meaning                     |
+| ----- | --------------------------- |
+| `-`   | File type (`d` = directory) |
+| `rwx` | Owner permissions           |
+| `r-x` | Group permissions           |
+| `r--` | Others permissions          |
+
+### Permission Values
+
+| Permission  | Value |
+| ----------- | ----- |
+| Read (r)    | 4     |
+| Write (w)   | 2     |
+| Execute (x) | 1     |
+
+### Common chmod Values
+
+| Permission | Numeric Value | Meaning                                  |
+| ---------- | ------------- | ---------------------------------------- |
+| `777`      | rwxrwxrwx     | Everyone has full access                 |
+| `755`      | rwxr-xr-x     | Owner full access, others read & execute |
+| `700`      | rwx------     | Only owner has access                    |
+| `644`      | rw-r--r--     | Owner read/write, others read only       |
+| `600`      | rw-------     | Only owner can read/write                |
+
+---
+
+# chmod Examples
+
+### Give full permission to everyone
+
+```bash
+chmod 777 file.txt
+```
+
+### Owner full access, others read only
+
+```bash
+chmod 644 file.txt
+```
+
+### Make a script executable
+
+```bash
+chmod +x script.sh
+```
+
+---
+
+# chown Examples
+
+Change owner:
+
+```bash
+sudo chown shikha file.txt
+```
+
+Change owner and group:
+
+```bash
+sudo chown shikha:developers file.txt
+```
+
+Change ownership recursively:
+
+```bash
+sudo chown -R shikha:developers /project
+```
+
+---
+
+# chgrp Examples
+
+Change group:
+
+```bash
+sudo chgrp developers file.txt
+```
+
+Recursive change:
+
+```bash
+sudo chgrp -R developers /project
+```
+
+---
+
+# umask Examples
+
+Check current umask:
+
+```bash
+umask
+```
+
+Set umask:
+
+```bash
+umask 022
+```
+
+### Interview Question:
+
+What is umask?
+
+**Answer:**
+Umask determines the default permissions assigned to newly created files and directories by subtracting permissions from the system defaults.
+
+Example:
+
+| Default       | Umask | Result |
+| ------------- | ----- | ------ |
+| File 666      | 022   | 644    |
+| Directory 777 | 022   | 755    |
+
+---
+
+# Frequently Asked Interview Questions
+
+| Question                             | Answer                                 |
+| ------------------------------------ | -------------------------------------- |
+| How do you check file permissions?   | `ls -l`                                |
+| How do you change file permissions?  | `chmod`                                |
+| How do you make a script executable? | `chmod +x script.sh`                   |
+| How do you change file ownership?    | `chown`                                |
+| How do you change group ownership?   | `chgrp`                                |
+| How do you create a group?           | `groupadd group_name`                  |
+| How do you add a user to a group?    | `gpasswd -a user group`                |
+| What does chmod 755 mean?            | Owner: rwx, Group: r-x, Others: r-x    |
+| What does chmod 777 mean?            | Full permissions for everyone          |
+| What is umask 022?                   | New files get 644, directories get 755 |
+
+### Quick Revision
+
+| Command      | Purpose                 |
+| ------------ | ----------------------- |
+| `groupadd`   | Create group            |
+| `gpasswd -a` | Add user to group       |
+| `groupdel`   | Delete group            |
+| `umask`      | Set default permissions |
+| `ls -l`      | View permissions        |
+| `chmod`      | Change permissions      |
+| `chown`      | Change owner            |
+| `chgrp`      | Change group owner      |
+
+
+Q: Why does sudo ask for a password?
+
+Answer:
+sudo asks for the current user's password to authenticate and verify that the user has permission to execute commands with root/administrator privileges. This prevents unauthorized users from performing administrative actions.
+
+### Linux Interview Notes – File Permissions, Compression & File Transfer Commands
+
+| Command   | Definition                                         | Why We Use It                            | Syntax                      | Example                     |
+| --------- | -------------------------------------------------- | ---------------------------------------- | --------------------------- | --------------------------- |
+| **umask** | Sets default permissions for new files/directories | Controls security of newly created files | `umask <value>`             | `umask 022`                 |
+| **ls -l** | Displays detailed file information                 | Check permissions, owner, group          | `ls -l [file]`              | `ls -l test.txt`            |
+| **chmod** | Changes file permissions                           | Grant/Revoke read, write, execute access | `chmod <permission> <file>` | `chmod 755 script.sh`       |
+| **chown** | Changes file owner                                 | Transfer ownership                       | `chown <user> <file>`       | `chown shikha file.txt`     |
+| **chgrp** | Changes group ownership                            | Assign file to another group             | `chgrp <group> <file>`      | `chgrp developers file.txt` |
+
+---
+
+## chmod Interview Questions
+
+### Permission Values
+
+| Permission  | Value |
+| ----------- | ----- |
+| Read (r)    | 4     |
+| Write (w)   | 2     |
+| Execute (x) | 1     |
+
+### Common Permissions
+
+| Value | Meaning                                     |
+| ----- | ------------------------------------------- |
+| 777   | rwxrwxrwx (Everyone full access)            |
+| 755   | rwxr-xr-x (Owner full, others read/execute) |
+| 644   | rw-r--r-- (Owner read/write, others read)   |
+| 700   | rwx------ (Only owner access)               |
+| 600   | rw------- (Owner read/write only)           |
+
+Example:
+
+```bash
+chmod 755 file.sh
+```
+
+---
+
+## Compression Commands
+
+| Command    | Definition                           | Why We Use It          | Syntax                      | Example                       |
+| ---------- | ------------------------------------ | ---------------------- | --------------------------- | ----------------------------- |
+| **zip**    | Compress files into .zip format      | Reduce file size       | `zip archive.zip file`      | `zip backup.zip data.txt`     |
+| **unzip**  | Extract .zip files                   | Decompress zip files   | `unzip archive.zip`         | `unzip backup.zip`            |
+| **gzip**   | Compress file into .gz format        | Save storage space     | `gzip file`                 | `gzip data.txt`               |
+| **gunzip** | Decompress .gz files                 | Restore original file  | `gunzip file.gz`            | `gunzip data.txt.gz`          |
+| **tar**    | Archive multiple files               | Create backups         | `tar options archive files` | `tar -cvf backup.tar folder/` |
+| **untar**  | Common term for extracting tar files | Restore archived files | `tar -xvf archive.tar`      | `tar -xvf backup.tar`         |
+
+---
+
+## tar Command Options
+
+| Option | Meaning              |
+| ------ | -------------------- |
+| `-c`   | Create archive       |
+| `-x`   | Extract archive      |
+| `-v`   | Verbose output       |
+| `-f`   | Specify filename     |
+| `-z`   | Use gzip compression |
+
+### Create tar archive
+
+```bash
+tar -cvf backup.tar folder/
+```
+
+### Extract tar archive
+
+```bash
+tar -xvf backup.tar
+```
+
+### Create compressed tar.gz
+
+```bash
+tar -czvf backup.tar.gz folder/
+```
+
+### Extract tar.gz
+
+```bash
+tar -xzvf backup.tar.gz
+```
+
+---
+
+## File Transfer Commands
+
+| Command   | Definition                     | Why We Use It                       | Syntax                             | Example                                |
+| --------- | ------------------------------ | ----------------------------------- | ---------------------------------- | -------------------------------------- |
+| **scp**   | Secure Copy Protocol           | Copy files between systems over SSH | `scp source destination`           | `scp file.txt user@server:/home/user/` |
+| **rsync** | Synchronizes files/directories | Fast file transfer and backup       | `rsync options source destination` | `rsync -av source/ dest/`              |
+
+---
+
+## SCP Examples
+
+Copy local file to remote server:
+
+```bash
+scp test.txt ubuntu@192.168.1.10:/home/ubuntu/
+```
+
+Copy file from server to local machine:
+
+```bash
+scp ubuntu@192.168.1.10:/home/ubuntu/test.txt .
+```
+
+---
+
+## RSYNC Examples
+
+Copy directory:
+
+```bash
+rsync -av project/ backup/
+```
+
+Copy to remote server:
+
+```bash
+rsync -av project/ ubuntu@192.168.1.10:/backup/
+```
+
+### Common rsync Options
+
+| Option | Meaning                  |
+| ------ | ------------------------ |
+| `-a`   | Archive mode             |
+| `-v`   | Verbose                  |
+| `-z`   | Compress during transfer |
+| `-r`   | Recursive                |
+
+---
+
+## Frequently Asked Interview Questions
+
+| Question                            | Answer                                                                                     |
+| ----------------------------------- | ------------------------------------------------------------------------------------------ |
+| What is umask?                      | Sets default permissions for newly created files/directories.                              |
+| What does chmod 755 mean?           | Owner: rwx, Group: r-x, Others: r-x                                                        |
+| Difference between chown and chgrp? | chown changes owner, chgrp changes group.                                                  |
+| Difference between zip and gzip?    | zip can compress multiple files; gzip compresses a single file.                            |
+| What is tar used for?               | Archiving multiple files/directories into one file.                                        |
+| Difference between scp and rsync?   | scp copies files; rsync copies only changed data, making it faster for repeated transfers. |
+| How do you extract a tar.gz file?   | `tar -xzvf file.tar.gz`                                                                    |
+
+### Quick Revision
+
+| Topic                     | Command    |
+| ------------------------- | ---------- |
+| View permissions          | `ls -l`    |
+| Change permissions        | `chmod`    |
+| Change owner              | `chown`    |
+| Change group              | `chgrp`    |
+| Check default permissions | `umask`    |
+| Zip file                  | `zip`      |
+| Unzip file                | `unzip`    |
+| Compress file             | `gzip`     |
+| Decompress file           | `gunzip`   |
+| Create archive            | `tar -cvf` |
+| Extract archive           | `tar -xvf` |
+| Copy file remotely        | `scp`      |
+| Sync files                | `rsync`    |
+
+These are among the most frequently asked Linux Admin, AWS, DevOps, and Technical Support interview topics.
 
 
 
