@@ -1,0 +1,455 @@
+Got it. You want the **FinanceApp project** like before, but with **multiple users**, so it feels like a real Linux Admin project.
+
+# Project: FinanceApp User & Access Management
+
+## Scenario
+
+Your company is launching **FinanceApp**.
+
+You need to onboard 4 employees:
+
+| User  | Role      | Group   |
+| ----- | --------- | ------- |
+| john  | Developer | finance |
+| alice | Developer | finance |
+| mike  | QA Tester | finance |
+| emma  | Support   | finance |
+
+Your responsibilities:
+
+* Create group
+* Create users
+* Set passwords
+* Create project directories
+* Create files
+* Assign ownership
+* Configure permissions
+* Create links
+* Search files
+* Manage passwords
+* Lock/Unlock users
+* Backup project
+* Delete users
+* Delete groups
+* Remove project
+
+---
+
+# Step 1: Create Finance Group
+
+```bash
+sudo groupadd finance
+```
+
+Verify:
+
+```bash
+getent group finance
+```
+
+---
+
+# Step 2: Create Users  || if you are using the -m and -G then (-m for the force the linux to create a user using the working directory if we do not use then we can not provide the space to the stpre file and anything -G for the add the user in existing group 
+
+```bash
+sudo useradd -m -G finance john
+
+sudo useradd -m -G finance alice
+
+sudo useradd -m -G finance mike
+
+sudo useradd -m -G finance emma
+```
+
+Verify:
+
+```bash
+id john
+id alice
+id mike
+id emma
+```
+
+---
+
+# Step 3: Set Passwords
+
+```bash
+sudo passwd john
+
+sudo passwd alice
+
+sudo passwd mike
+
+sudo passwd emma
+```
+
+---
+
+# Step 4: Create FinanceApp Directory Structure
+
+```bash
+sudo mkdir -p /financeapp
+```
+
+Create subdirectories:
+
+```bash
+sudo mkdir /financeapp/development
+
+sudo mkdir /financeapp/testing
+
+sudo mkdir /financeapp/support
+
+sudo mkdir /financeapp/shared
+
+sudo mkdir /financeapp/backups
+```
+
+Verify:
+
+```bash
+tree /financeapp
+```
+
+---
+
+# Step 5: Assign Ownership
+
+Development team:
+
+```bash
+sudo chown john:finance /financeapp/development
+```
+
+Testing team:
+
+```bash
+sudo chown mike:finance /financeapp/testing
+```
+
+Support team:
+
+```bash
+sudo chown emma:finance /financeapp/support
+```
+
+Verify:
+
+```bash
+ls -l /financeapp
+```
+
+---
+
+# Step 6: Create Files
+
+```bash
+sudo touch /financeapp/development/app.py
+
+sudo touch /financeapp/development/config.conf
+
+sudo touch /financeapp/testing/test_cases.txt
+
+sudo touch /financeapp/support/tickets.log
+
+sudo touch /financeapp/shared/project_notes.txt
+```
+
+Verify:
+
+```bash
+find /financeapp
+```
+
+---
+
+# Step 7: Add Data
+
+```bash
+echo "Finance Application Code" | sudo tee /financeapp/development/app.py
+
+echo "Database Configuration" | sudo tee /financeapp/development/config.conf
+
+echo "Login Test Case" | sudo tee /financeapp/testing/test_cases.txt
+
+echo "Customer Ticket" | sudo tee /financeapp/support/tickets.log
+
+echo "Project Notes" | sudo tee /financeapp/shared/project_notes.txt
+```
+
+---
+
+# Step 8: Permission Management
+
+```bash
+sudo chmod 775 /financeapp/development
+
+sudo chmod 775 /financeapp/testing
+
+sudo chmod 775 /financeapp/support
+
+sudo chmod 777 /financeapp/shared
+```
+
+Verify:
+
+```bash
+ls -ld /financeapp/*
+```
+
+---
+
+# Step 9: File Permissions
+
+```bash
+sudo chmod 644 /financeapp/development/app.py
+
+sudo chmod 600 /financeapp/development/config.conf
+
+sudo chmod 644 /financeapp/testing/test_cases.txt
+
+sudo chmod 640 /financeapp/support/tickets.log
+```
+
+Verify:
+
+```bash
+ls -lR /financeapp
+```
+
+---
+
+# Step 10: Soft Link
+
+```bash
+ln -s /financeapp/development/config.conf \
+/financeapp/shared/config_softlink
+```
+
+Verify:
+
+```bash
+ls -l /financeapp/shared
+```
+
+---
+
+# Step 11: Hard Link
+
+```bash
+ln /financeapp/testing/test_cases.txt \
+/financeapp/shared/testcase_hardlink
+```
+
+Verify:
+
+```bash
+ls -li /financeapp/testing/test_cases.txt \
+/financeapp/shared/testcase_hardlink
+```
+
+---
+
+# Step 12: grep Practice
+
+```bash
+grep Finance /financeapp/development/app.py
+```
+
+```bash
+grep Login /financeapp/testing/test_cases.txt
+```
+
+```bash
+grep Ticket /financeapp/support/tickets.log
+```
+
+---
+
+# Step 13: find Practice
+
+Find txt files:
+
+```bash
+find /financeapp -name "*.txt"
+```
+
+Find files owned by john:
+
+```bash
+find /financeapp -user john
+```
+
+Find files owned by mike:
+
+```bash
+find /financeapp -user mike
+```
+
+---
+
+# Step 14: Password Expiry
+
+```bash
+sudo chage -M 30 john
+
+sudo chage -M 30 alice
+
+sudo chage -M 30 mike
+
+sudo chage -M 30 emma
+```
+
+Check:
+
+```bash
+sudo chage -l john
+```
+
+---
+
+# Step 15: Lock User
+
+Suppose Alice is on leave.
+
+```bash
+sudo passwd -l alice
+```
+
+Verify:
+
+```bash
+sudo passwd -S alice
+```
+
+---
+
+# Step 16: Unlock User
+
+```bash
+sudo passwd -u alice
+```
+
+---
+
+# Step 17: Backup FinanceApp
+
+```bash
+sudo tar -czvf financeapp_backup.tar.gz /financeapp
+```
+
+Verify:
+
+```bash
+ls -lh financeapp_backup.tar.gz
+```
+
+---
+
+# Step 18: Delete a File
+
+```bash
+rm /financeapp/shared/project_notes.txt
+```
+
+Verify:
+
+```bash
+ls /financeapp/shared
+```
+
+---
+
+# Step 19: Delete a Directory
+
+```bash
+rm -r /financeapp/support
+```
+
+Verify:
+
+```bash
+ls /financeapp
+```
+
+---
+
+# Step 20: Offboard User Mike
+
+Lock account:
+
+```bash
+sudo passwd -l mike
+```
+
+Kill processes:
+
+```bash
+sudo pkill -u mike
+```
+
+Backup home:
+
+```bash
+sudo tar -czvf mike_backup.tar.gz /home/mike
+```
+
+Delete user:
+
+```bash
+sudo userdel -r mike
+```
+
+Verify:
+
+```bash
+id mike
+```
+
+---
+
+# Step 21: Offboard User Emma
+
+```bash
+sudo passwd -l emma
+
+sudo pkill -u emma
+
+sudo tar -czvf emma_backup.tar.gz /home/emma
+
+sudo userdel -r emma
+```
+
+---
+
+# Step 22: Delete Finance Group
+
+After all users are removed:
+
+```bash
+sudo groupdel finance
+```
+
+Verify:
+
+```bash
+getent group finance
+```
+
+---
+
+# Step 23: Remove Entire Project
+
+```bash
+sudo rm -rf /financeapp
+```
+
+Verify:
+
+```bash
+ls /
+```
+
+This is a much more realistic Linux Admin lab because it covers **multiple users sharing one project**, ownership, permissions, onboarding, offboarding, backups, links, file management, and cleanup in one complete workflow.
+
