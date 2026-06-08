@@ -1262,6 +1262,38 @@ rsync -av project/ ubuntu@192.168.1.10:/backup/
 These are among the most frequently asked Linux Admin, AWS, DevOps, and Technical Support interview topics.
 
 
+🟡 If you want to ADD content (not replace)
 
+Use >>:
+
+echo "New update added" >> /financeapp/development/app.py
+🟢 Method 2: Using editor (best for real work)
+Open file:
+nano /financeapp/development/app.py
+
+Then:
+
+type your content
+save: CTRL + X
+press Y
+press Enter
+🔥 Quick summary
+Action	Command
+Create file	touch
+Add/replace content	>
+Append content	>>
+Edit manually	nano
+💡 Interview tip:
+> = overwrite
+>> = append
+nano/vim = manual editing
+
+
+ | Method       | Use                   |
+| ------------ | --------------------- |
+| `echo`       | single line           |
+| `>`          | overwrite             |
+| `>>`         | append                |
+| `cat << EOF` | multi-line real files |
 
   
