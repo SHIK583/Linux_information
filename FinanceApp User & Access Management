@@ -452,4 +452,25 @@ ls /
 ```
 
 This is a much more realistic Linux Admin lab because it covers **multiple users sharing one project**, ownership, permissions, onboarding, offboarding, backups, links, file management, and cleanup in one complete workflow.
+0	-	--	-
+1	-	--	x
+2	-	w	-
+3	-	w	x
+4	r	--	-
+5	r	--	x
+6	r	w	-
+7	r	w	x
+
+umask (User File Creation Mask) is used to set the default permissions for newly created files and directories.
+
+When you create a file or directory, Linux assigns default permissions and then subtracts the umask value.
+
+| umask | User Access | Group Access  | Other Access  |
+| ----- | ----------- | ------------- | ------------- |
+| 0000  | all         | all           | all           |
+| 0002  | all         | all           | read, execute |
+| 0007  | all         | all           | none          |
+| 0022  | all         | read, execute | read, execute |
+| 0027  | all         | read, execute | none          |
+| 0077  | all         | none          | none          |
 
